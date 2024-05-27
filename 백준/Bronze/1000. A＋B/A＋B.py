@@ -1,4 +1,3 @@
 import sys
-
-N,M =map(int, sys.stdin.readline().split())
+N,M =map(int, input().split())
 print(N+M)
