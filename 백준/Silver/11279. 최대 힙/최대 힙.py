@@ -3,7 +3,8 @@ import heapq
 
 def input():
     return sys.stdin.readline()
-N = int(input())
+
+N=int(input())
 heap=[]
 for i in range(N):
     a=int(input())
