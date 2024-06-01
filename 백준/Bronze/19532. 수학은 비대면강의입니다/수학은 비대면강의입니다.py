@@ -1,10 +1,20 @@
+def solve_linear_equations(a, b, c, d, e, f):
+    # Calculate the determinant of the coefficient matrix
+    determinant = a * e - b * d
+    
+    # If determinant is zero, there is no unique solution
+    if determinant == 0:
+        return "No unique solution"
+    
+    # Using Cramer's rule to find x and y
+    x = (c * e - b * f) / determinant
+    y = (a * f - c * d) / determinant
+    
+    return int(x), int(y)
+
+# Input
 a, b, c, d, e, f = map(int, input().split())
 
-for x in range(-999, 1000):
-    for y in range(-999, 1000):
-        if a * x + b * y == c and d * x + e * y == f:
-            print(x, y)
-            break
-    else:
-        continue
-    break
+# Solve the system of equations
+solution = solve_linear_equations(a, b, c, d, e, f)
+print(solution[0], solution[1])
