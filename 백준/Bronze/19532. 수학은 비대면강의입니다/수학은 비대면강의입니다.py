@@ -2,10 +2,6 @@ def solve_linear_equations(a, b, c, d, e, f):
     # Calculate the determinant of the coefficient matrix
     determinant = a * e - b * d
     
-    # If determinant is zero, there is no unique solution
-    if determinant == 0:
-        return "No unique solution"
-    
     # Using Cramer's rule to find x and y
     x = (c * e - b * f) / determinant
     y = (a * f - c * d) / determinant
