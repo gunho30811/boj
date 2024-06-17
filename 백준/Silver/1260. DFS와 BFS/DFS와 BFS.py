@@ -35,5 +35,4 @@ def main():
     bfs_visited = bfs(graph, v)
     print(' '.join(map(str, bfs_visited)))
 
-if __name__ == "__main__":
-    main()
+main()
