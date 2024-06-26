@@ -1,3 +1,4 @@
+import java.util.*;
 class Solution {
     public int solution(String[] babbling) {
         String [] baby={"aya","ye","woo","ma"};
@@ -5,14 +6,18 @@ class Solution {
         
         for(String babblings: babbling){
             
-            for(String pattern : baby){
-                babblings=babblings.replace(pattern," ");
+            for(String babys:baby){
+                System.out.println(babys);
+                babblings=babblings.replace(babys," ");
+                System.out.println(babblings);
             }
-            babblings= babblings.replace(" ","");
+            babblings=babblings.replace(" ","");
             if(babblings.isEmpty()){
                 answer++;
             }
         }
-    return answer;
+        
+        
+        return answer;
     }
 }
