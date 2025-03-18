@@ -11,41 +11,41 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
 
+        // N이 K보다 크거나 같으면 -1만 하면 되므로 바로 출력
         if (N >= K) {
-            System.out.println(N - K); // 단순히 뒤로만 가면 되는 경우
+            System.out.println(N - K);
             return;
         }
 
-        int cnt = 0;
-        while (N > K) {
-            N /= 2;
-            cnt++;
-        }
+        System.out.println(bfs(N, K));
+    }
 
+    static int bfs(int start, int target) {
         Queue<Node> queue = new LinkedList<>();
-        queue.offer(new Node(N, cnt));
+        boolean[] visited = new boolean[100001];
 
-        boolean[] visited = new boolean[100001]; // 방문 체크 배열
-        visited[N] = true;
+        queue.offer(new Node(start, 0));
+        visited[start] = true;
 
         while (!queue.isEmpty()) {
             Node current = queue.poll();
 
-            if (current.location == K) {
-                System.out.println(current.depth);
-                return;
+            if (current.location == target) {
+                return current.depth;
             }
 
-            // 다음 이동 가능한 위치들
-            int[] nextLocations = {current.location + 1, current.location - 1, current.location * 2};
+            // 이동 가능한 경우의 수
+            int[] nextMoves = {current.location - 1, current.location + 1, current.location * 2};
 
-            for (int next : nextLocations) {
+            for (int next : nextMoves) {
                 if (next >= 0 && next <= 100000 && !visited[next]) {
                     visited[next] = true;
                     queue.offer(new Node(next, current.depth + 1));
                 }
             }
         }
+
+        return -1;
     }
 
     static class Node {
