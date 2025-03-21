@@ -8,21 +8,21 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N= Integer.parseInt(br.readLine());
 		
-		int [] dist= new int[N-1];
-		int [] price= new int[N];
+		long [] dist= new long[N-1];
+		long [] price= new long[N];
 		
 		StringTokenizer st= new StringTokenizer(br.readLine());
 		for(int i=0;i<N-1;i++) {
-			dist[i]=Integer.parseInt(st.nextToken());
+			dist[i]=Long.parseLong(st.nextToken());
 		}
 		
 		st=new StringTokenizer(br.readLine());
 		for(int i=0;i<N;i++) {
-			price[i]=Integer.parseInt(st.nextToken());
+			price[i]=Long.parseLong(st.nextToken());
 		}
 		
-		int minprice=0;
-		int total=0;
+		long minprice=0;
+		long total=0;
 		minprice=price[0];// 최초기름값
 		for(int i=0;i<N-1;i++) {
 			total+=minprice*dist[i];
