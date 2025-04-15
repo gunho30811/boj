@@ -1,79 +1,62 @@
 import java.io.*;
 import java.util.*;
 public class Main {
-    
-	/*
-	 * 
-4
-DOG
-GOD
-GOOD
-DOLL
-DG
-	 */
 	
     public static void main(String[] args) throws IOException {
     	
     	BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
     	int N= Integer.parseInt(br.readLine());
-    	String input = br.readLine();
-    	char[] Arr=input.toCharArray();
-    	Arrays.sort(Arr);
-    	int Alg=input.length();
-    	//조건
-    	//1.한 문자를 빼거나
-    	//2.한 문자를 더하거나
-    	//3.하나의 문자를 다른문자로 바꾸거나
-    	int cnt=0;
+    	String Fword=br.readLine();
+    	char[] Fw =Fword.toCharArray();
+    	Arrays.sort(Fw);
     	
+    	int cnt=0;
     	for(int i=0;i<N-1;i++) {
-    		String Scomp=br.readLine();
-    		char [] Sarr=Scomp.toCharArray();
-    		Arrays.sort(Sarr);
-    		int Slg=Scomp.length();
+    		String Nword=br.readLine();
+    		char [] Nw = Nword.toCharArray();
+    		Arrays.sort(Nw);
     		
-    		//문자가 같으면서 3번이면 cnt++
-
-			 if(Alg==Slg) {
-				 
-				 if(Arrays.equals(Arr,Sarr)) cnt++;
-				 //한글자 교체
-				 else {
-					 if(isOneCharDiffSimple(Arr,Sarr)) cnt++;
-				 }
-				 
-			 } 
+    		if(Fw.length==Nw.length) {
+    			//아예 같은 문자열
+    			if(Arrays.equals(Fw,Nw)) cnt ++;
+    			
+    			//문자열 길이는 같지만, 변환으로 해결 가능한지 확인
+    			else {
+    				if (sameWord(Fw,Nw)) cnt++;
+    			}
+    		}
+    		//문자열의 크기는 1개 이상 차이나면 안된다.
     		
-    		//원 문자열보다 1만큼 크면 2번 
-    		if(Alg+1==Slg) {
-    			if(isOneCharInserted(Arr,Sarr)) cnt++;
+    		//FW 보다 Nw 문자열 길이가 1 작은 경우
+    		if(Fw.length==Nw.length+1) {
+    			if(difLng(Fw,Nw)) cnt++;
     		}
-    		//원 문자열보다 1만큼 작으면 1번 
-    		if(Alg==Slg+1) {
-    			if(isOneCharInserted(Sarr,Arr)) cnt++;
+    		
+    		//Fw 보다 Nw 문자열 길이가 1 큰 경우 
+    		if(Fw.length==Nw.length-1) {
+    			if(difLng(Nw,Fw)) cnt++;
     		}
+    		
     		
     	}
-    	
-    	System.out.println(cnt);
-        
+
+        System.out.println(cnt);
         	
       }
     
-    private static boolean isOneCharInserted(char[]shortArr, char[]longArr) {
-    	int shotI = 0, longI =0, misMatch=0;
+    private static boolean difLng(char L[], char S[]) {
+    	int mismatch=0,i=0,j=0;
     	
-    	while(shotI<shortArr.length&& longI<longArr.length) {
+    	while(i<L.length && j<S.length) {
     		
-    		if(shortArr[shotI]==longArr[longI]) {
-    			shotI++;
-    			longI++;
+    		if(L[i]!=S[j]) {
+    			i++;
+    			mismatch++;
+    			if(mismatch>1) return false;
     		}
-    		else {
-    			longI++;
-    			misMatch++;
-    			if(misMatch>1) return false;
-    			
+    		else{
+    			i++;
+    			j++;
     		}
     		
     	}
@@ -81,25 +64,27 @@ DG
     	
     	return true;
     }
-    private static boolean isOneCharDiffSimple(char[] a, char[] b) {
-        int match = 0;
-        int i = 0, j = 0;
-
-        while (i < a.length && j < b.length) {
-            if (a[i] == b[j]) {
-                match++;
-                i++;
-                j++;
-            } else if (a[i] < b[j]) {
-                i++;
-            } else {
-                j++;
-            }
-        }
-
-        return match == a.length - 1;
+    
+    private static boolean sameWord(char Fw[], char Nw[]) {
+    	int match=0;
+    	int j=0; int k=0;
+    	while(j<Fw.length && k<Nw.length){
+    		
+    		if(Fw[j]>Nw[k]) {
+    			k++;
+    		}
+    		else if(Fw[j]<Nw[k]) {
+    			j++;
+    		}
+    		else{
+    			match++; j++; k++;
+    		}
+    		
+    	}
+    	
+    	return match== Fw.length -1;
     }
-
+   
 
     
 }
