@@ -54,10 +54,9 @@ public class Main {
     			mismatch++;
     			if(mismatch>1) return false;
     		}
-    		else{
-    			i++;
-    			j++;
-    		}
+    		else {i++; j++;}
+
+    	
     		
     	}
     	
