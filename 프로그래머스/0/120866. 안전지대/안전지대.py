@@ -26,5 +26,12 @@ def solution(board):
                 danger[ny][nx]=1
                 
     cnt=sum(row.count(0) for row in danger)
+    
+    cnt=0
+    
+    for row in danger:
+        for val in row:
+            if(val==0):
+                cnt+=1
 
     return cnt
